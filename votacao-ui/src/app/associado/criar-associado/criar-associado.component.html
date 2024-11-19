@@ -1,0 +1,43 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="confirmar(f)">
+    <div class="grid">
+      <div class="col-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Associado</h1>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12 p-fluid">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <button pButton label="Salvar" [disabled]="f.invalid ?? false" icon="pi pi-save"></button>
+            <p-button type="button" label="Novo" (click)="novo(f)" icon="pi pi-file"></p-button>
+          </div>
+
+          <div class="p-toolbar-group-right">
+            <a pButton label="Pesquisar" [routerLink]="['/associados']" icon="pi pi-search"></a>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12 p-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome" required maxlength="100" minlength="1"
+               [(ngModel)]="associado.nome" #nome="ngModel">
+
+        <div *ngIf="nome.hasError('required') && nome.dirty" class="ui-message ui-messages-error">
+          Informe uma descrição
+        </div>
+
+        <div *ngIf="nome.hasError('minlength') && nome.dirty" class="ui-message ui-messages-error">
+          Menos de 1 caractere
+        </div>
+      </div>
+    </div>
+
+    <p-toast position="top-right"></p-toast>
+    <p-confirmDialog icon="pi pi-exclamation-triangle" [acceptLabel]="'Sim'" [rejectLabel]="'Não'"></p-confirmDialog>
+  </form>
+</div>

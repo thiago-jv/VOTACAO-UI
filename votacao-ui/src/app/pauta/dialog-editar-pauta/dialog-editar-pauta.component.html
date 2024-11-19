@@ -1,0 +1,67 @@
+<p-dialog [(visible)]="display" [modal]="true" [closable]="false" [style]="{width: '800px'}">
+  
+  <div class="grid">
+    <div class="col-12">
+      <h1>{{ editando ? 'Edição de' : 'Novo' }} Pauta </h1>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="col-12 p-fluid">
+      <label>Descrição</label>
+      <input pInputText type="text" [(ngModel)]="descricao" 
+             required maxlength="255" minlength="1" 
+             name="descricao">
+    </div>
+
+    <div class="col-12 p-fluid">
+      <label>Associados</label>
+      <p-multiSelect [options]="associadosDisponiveis" 
+                     [(ngModel)]="associadosSelecionados" 
+                     optionLabel="nome"
+                     optionValue="id"
+                     name="associados">
+      </p-multiSelect>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="grid">
+    <div class="col-12 p-fluid">
+      <p-table [value]="pautaAssociado.associados">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Id</th>
+            <th>Nome</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-associado>
+          <tr>
+            <td>{{ associado.id }}</td>
+            <td>{{ associado.nome }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <p-footer>
+    <button (click)="confirmar()"  
+            [disabled]="!['SIM', 'NAO'].includes(pautaAssociado.habilitado || '')" 
+            pButton label="Salvar" 
+            icon="pi pi-plus">
+    </button>
+    <button (click)="fechar()" 
+            pButton label="Fechar" 
+            icon="pi pi-times">
+    </button>
+  </p-footer>
+
+</p-dialog>
+
+<p-confirmDialog icon="pi pi-exclamation-triangle" 
+                 [acceptLabel]="'Sim'" 
+                 [rejectLabel]="'Não'">
+</p-confirmDialog>

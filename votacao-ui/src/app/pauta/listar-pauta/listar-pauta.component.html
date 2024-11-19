@@ -1,0 +1,106 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    
+    <div class="grid">
+      <div class="col-12">
+        <h1>Pautas</h1>
+      </div>
+    
+      <div class="col-12">
+        <span class="p-float-label">
+          <input id="float-input" pInputText type="text" name="habilitado" [(ngModel)]="filtro.habilitado"> 
+          <label for="float-input">Status</label>
+        </span>
+      </div>
+    </div>
+  
+    <div class="grid">
+      <div class="col-12 p-fluid">
+        <p-toolbar>
+          <div class="ui-toolbar-group-left">
+            <button pButton type="submit" label="Pesquisar" icon="pi pi-search"></button>
+          </div>
+          <div class="p-toolbar-group-left">
+            <p-button type="button" label="Novo" [routerLink]="['/pautas/novo']" icon="pi pi-plus"></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>    
+
+    <div class="grid">
+      <div class="col-12 p-fluid">
+        <p-table [value]="pautas" [rows]="filtro.intensPorPagina" [totalRecords]="totalRegistros"
+                 [paginator]="true" [responsive]="true" (onLazyLoad)="aoMudarPagina($event)" [lazy]="true"
+                 emptyMessage="Nenhum recurso encontrado">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Id</th>
+              <th>Pauta</th>
+              <th>Sim</th>
+              <th>Não</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-pauta>
+            <tr>
+              <td>{{ pauta.id }}</td>
+              <td>{{ pauta.descricao }}</td>
+              <td>{{ pauta.totalSim }}</td>
+              <td>{{ pauta.totalNao }}</td>
+              <td>{{ pauta.totalVoto }}</td>
+              <td>{{ pauta.habilitado }}</td>
+              <td class="col-acoes">
+                <!-- Fechar Pauta -->
+                <button pButton
+                        icon="pi pi-lock"
+                        [pTooltip]="'Fechar'"
+                        tooltipPosition="top"
+                        (click)="togglePauta(pauta, 'FECHADO')"
+                        class="p-button-rounded p-button-danger"
+                        [disabled]="pauta.habilitado !== 'SIM'">
+                </button>
+                
+                <!-- Habilitar Pauta SIM -->
+                <button pButton
+                        icon="pi pi-check"
+                        [pTooltip]="'Habilitado SIM'"
+                        tooltipPosition="top"
+                        (click)="togglePauta(pauta, 'SIM')"
+                        class="p-button-rounded p-button-success"
+                        [disabled]="pauta.habilitado !== 'FECHADA' && pauta.habilitado !== 'NAO'">
+                </button>
+                
+                <!-- Habilitar Pauta NÃO -->
+                <button pButton                 
+                        icon="pi pi-times"
+                        [pTooltip]="'Habilitado NÃO'"
+                        tooltipPosition="top"
+                        (click)="togglePauta(pauta, 'NAO')"
+                        class="p-button-rounded p-button-warning"
+                        [disabled]="pauta.habilitado !== 'SIM'">
+                </button>
+
+                <!-- Editar Pauta -->
+                <button pButton
+                        icon="pi pi-pencil"
+                        [pTooltip]="'Editar'"
+                        tooltipPosition="top"
+                        (click)="openDialog(pauta.id)"
+                        class="p-button-rounded p-button-info">
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+
+        <!-- Dialog para editar pauta -->
+        <app-dialog-editar-pauta [id]="selectedPautaId" [display]="display"></app-dialog-editar-pauta>
+      </div>
+    </div>
+
+    <p-toast position="top-right"></p-toast>
+  </form>
+</div>

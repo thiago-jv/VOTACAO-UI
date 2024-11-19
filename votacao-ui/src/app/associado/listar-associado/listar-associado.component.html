@@ -1,0 +1,62 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="grid">
+      <div class="col-12">
+        <h1>Associados</h1>
+      </div>
+
+      <div class="col-12">
+        <span class="p-float-label">
+          <input id="float-input" pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+          <label for="float-input">Nome</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12 p-fluid">
+        <p-toolbar>
+          <div class="ui-toolbar-group-left">
+            <button pButton type="submit" label="Pesquisar" icon="pi pi-search"></button>
+          </div>
+
+          <div class="p-toolbar-group-left">
+            <p-button type="button" label="Novo" [routerLink]="['/associados/novo']" icon="pi pi-plus"></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col-12 p-fluid">
+        <p-table [value]="associados" [rows]="filtro.intensPorPagina" [totalRecords]="totalRegistros"
+                 [paginator]="true" [responsive]="true" (onLazyLoad)="aoMudarPagina($event)" [lazy]="true"
+                 emptyMessage="Nenhum recurso encontrado">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Ações</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-associado>
+            <tr>
+              <td>{{ associado.id }}</td>
+              <td>{{ associado.nome }}</td>
+              <td class="col-acoes">
+                <button pButton icon="pi pi-pencil" [pTooltip]="'Editar'" tooltipPosition="top"
+                        class="p-button-rounded p-button-info" [routerLink]="['/associados', associado.id]"></button>
+
+                <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger" 
+                        [pTooltip]="'Excluir'" tooltipPosition="top" (click)="confirmarExclusao(associado)"></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+    <p-toast position="top-right"></p-toast>
+    <p-confirmDialog icon="pi pi-exclamation-triangle" [acceptLabel]="'Sim'" [rejectLabel]="'Não'"></p-confirmDialog>
+  </form>
+</div>

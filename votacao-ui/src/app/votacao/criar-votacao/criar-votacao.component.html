@@ -1,0 +1,59 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="confirmar(f)">
+    
+    <div class="grid">
+      <div class="col-12">
+        <h1>{{ editando ? 'Edição de' : 'Nova' }} votação </h1>
+      </div>
+    </div>
+  
+    <div class="grid">
+      <div class="col-12 p-fluid">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <button pButton label="Salvar" icon="pi pi-save" [disabled]="f.invalid ?? false"></button>
+            <p-button type="button" label="Novo" (click)="novo(f)" icon="pi pi-file"></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+  
+      <div class="col-4 p-fluid">
+        <label>Associados</label>
+        <p-dropdown name="associado" [options]="associados"
+                    placeholder="Selecione" [(ngModel)]="votacao.associado.id"
+                    optionLabel="nome" optionValue="value" [emptyMessage]="'Nenhum dado encontrado'"
+                    [required]="true" #associado="ngModel" (onChange)="onAssociadoChange($event.value)">
+        </p-dropdown>
+        <div *ngIf="associado.invalid && associado.touched" class="error">
+          Associado é obrigatório.
+        </div>
+      </div>
+  
+      <div class="col-4 p-fluid">
+        <label>Pautas</label>
+        <p-dropdown name="pauta" [options]="pautas"
+                    placeholder="Selecione" [(ngModel)]="votacao.pauta.id"
+                    optionLabel="descricao" optionValue="value" [emptyMessage]="'Nenhum dado encontrado'"
+                    [required]="true" #pauta="ngModel">
+        </p-dropdown>
+        <div *ngIf="pauta.invalid && pauta.touched" class="error">
+          Pauta é obrigatório.
+        </div>
+      </div>
+
+      <div class="col-4 p-fluid">
+        <label>Voto</label>
+        <p-dropdown name="voto" [options]="tipoVoto"
+                    placeholder="Selecione" [(ngModel)]="votacao.voto"
+                    [required]="true" #voto="ngModel">
+        </p-dropdown>
+        <div *ngIf="voto.invalid && voto.touched" class="error">
+          Voto é obrigatório.
+        </div>
+      </div>
+    </div>
+
+    <p-toast position="top-right"></p-toast>
+    <p-confirmDialog icon="pi pi-exclamation-triangle" [acceptLabel]="'Sim'" [rejectLabel]="'Não'"></p-confirmDialog>
+  </form>
+</div>
