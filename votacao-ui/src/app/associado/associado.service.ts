@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Associado, AssociadoFiltro, AssociadoResponse } from '../core/model';
 import { ErrorHandlerService } from '../core/error-handler.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssociadoService {
 
-  associadoUrl = "http://localhost:8089/votacaoapi/v1/associados";
+  associadoUrl: string = `${environment.apiUrl}/v1/associados`;
 
   constructor(
     private http: HttpClient,

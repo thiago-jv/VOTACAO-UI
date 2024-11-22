@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Associado, Pauta, PautaAssociado, PautaFiltro, PautaResponse } from '../core/model';
 import { firstValueFrom } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PautaService {
 
-  pautaUrl = "http://localhost:8089/votacaoapi/v1/pautas";
+  pautaUrl: string = `${environment.apiUrl}/v1/pautas`;
 
   constructor(private http: HttpClient) { }
 

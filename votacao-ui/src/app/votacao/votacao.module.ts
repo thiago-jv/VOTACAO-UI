@@ -9,6 +9,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { VotacaoRoutingModule } from './votacao-routing.module';
 
 
 @NgModule({
@@ -20,11 +21,11 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ToolbarModule,
     FormsModule,
     ButtonModule,
-    RouterModule,
     SelectButtonModule,
     DropdownModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    VotacaoRoutingModule
   ],
   exports: [
     CriarVotacaoComponent

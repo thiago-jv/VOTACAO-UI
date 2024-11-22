@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
 import { ToastModule } from 'primeng/toast';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { AssociadoRoutingModule } from './associado-routing.module';
 
 
 @NgModule({
@@ -28,10 +29,10 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     RouterModule,
     InputTextModule,
     TableModule,
-    RouterModule,
     TooltipModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    AssociadoRoutingModule
     
     
   ],

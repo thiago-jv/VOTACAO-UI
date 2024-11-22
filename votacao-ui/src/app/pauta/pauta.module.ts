@@ -18,6 +18,7 @@ import { CriarPautaComponent } from './criar-pauta/criar-pauta.component';
 import { ListarPautaComponent } from './listar-pauta/listar-pauta.component';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PautaRoutingModule } from './pauta-routing.module';
 
 
 @NgModule({
@@ -31,7 +32,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ToolbarModule,
     FormsModule,
     ButtonModule,
-    RouterModule,
     InputTextModule,
     TableModule,
     TooltipModule,
@@ -40,7 +40,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     MultiSelectModule,
     DialogModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    PautaRoutingModule
   ],
   exports: [
     CriarPautaComponent,
