@@ -11,8 +11,6 @@ Primeng 14 [Sobre](https://www.primefaces.org/primeng-v14-lts/)
 
 Fontawesome [Sobre](https://fontawesome.com/)
 
-Toasty [Sobre](https://www.npmjs.com/package/ng2-toasty)
-
 Node 16 [Sobre](https://nodejs.org/en/download/package-manager)
 
 Componentes [Sobre](https://v5.angular.io/guide/component-interaction)
